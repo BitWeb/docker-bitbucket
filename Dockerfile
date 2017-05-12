@@ -4,7 +4,7 @@ MAINTAINER BitWeb
 # Configuration variables.
 ENV BITBUCKET_HOME    /var/atlassian/bitbucket
 ENV BITBUCKET_INSTALL /opt/atlassian/bitbucket
-ENV BITBUCKET_VERSION 4.14.1
+ENV BITBUCKET_VERSION 5.0.1
 ENV DOWNLOAD_URL      https://downloads.atlassian.com/software/stash/downloads/atlassian-bitbucket-${BITBUCKET_VERSION}.tar.gz
 
 # MySQL Connector
