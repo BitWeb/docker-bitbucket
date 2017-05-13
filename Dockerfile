@@ -29,6 +29,9 @@ RUN mkdir -p             ${BITBUCKET_INSTALL} \
     && curl -L --silent  ${DOWNLOAD_URL} | tar -xz --strip=1 -C "$BITBUCKET_INSTALL" \
     && curl -Ls          ${CONNECTOR_DOWNLOAD_URL} | tar -xz --directory ${BITBUCKET_INSTALL}/lib --strip-components=1 --no-same-owner "mysql-connector-java-$CONNECTOR_VERSION/mysql-connector-java-$CONNECTOR_VERSION-bin.jar" \
     && mkdir -p          ${BITBUCKET_INSTALL}/conf/Catalina      \
+    && mkdir -p          ${BITBUCKET_INSTALL}/logs               \
+    && mkdir -p          ${BITBUCKET_INSTALL}/temp               \
+    && mkdir -p          ${BITBUCKET_INSTALL}/work               \
     && chmod -R 700      ${BITBUCKET_INSTALL}/conf/Catalina      \
     && chmod -R 700      ${BITBUCKET_INSTALL}/logs               \
     && chmod -R 700      ${BITBUCKET_INSTALL}/temp               \
@@ -39,7 +42,7 @@ RUN mkdir -p             ${BITBUCKET_INSTALL} \
 RUN sed -i "s#export BITBUCKET_HOME=#export BITBUCKET_HOME=$BITBUCKET_HOME#g" ${BITBUCKET_INSTALL}/bin/set-bitbucket-home.sh
     
 # Change entropy gathering daemon https://jira.atlassian.com/browse/BSERV-8345
-RUN sed -i 's/JVM_SUPPORT_RECOMMENDED_ARGS=""/JVM_SUPPORT_RECOMMENDED_ARGS="-Djava\.security\.egd=file:\/dev\/\.\/urandom"/g' ${BITBUCKET_INSTALL}/bin/setenv.sh
+RUN sed -i 's/JVM_SUPPORT_RECOMMENDED_ARGS=""/JVM_SUPPORT_RECOMMENDED_ARGS="-Djava\.security\.egd=file:\/dev\/\.\/urandom"/g' ${BITBUCKET_INSTALL}/bin/_start-webapp.sh
 
 WORKDIR $BITBUCKET_INSTALL
 
